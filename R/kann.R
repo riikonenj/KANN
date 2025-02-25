@@ -11,6 +11,7 @@
 #' @param k Number of nearest samples (positive integer) to consider in kNN-regression
 #' @param p Power of the inverse distance in which to raise reference sample weights
 #' @param r0 Minimum radius inside which samples are assigned same weight r0
+#' @param cores Number of parallel CPU cores utilized
 #'
 #' @return data.table of query sample profiles
 #' @export
@@ -34,19 +35,22 @@
 #'                        dist.matrix = dist,
 #'                        k = 25,
 #'                        p = 0,
-#'                        r0 = 0.1)
+#'                        r0 = 0.1,
+#'                        cores = 1)
 #'
 kann <- function(ref.profiles = NULL,
                  dist.matrix = NULL,
                  k = 25,
-                 p = 0,
-                 r0 = 0.1){
+                 p = 1,
+                 r0 = 0.1,
+                 cores = 1){
 
   validate_kann_input(ref.profiles = ref.profiles,
                       dist.matrix = dist.matrix,
                       k = k,
                       p = p,
                       r0 = r0)
+
 
   # Array indices of samples distances to themselves (this is zero)
   i.zerodist <- which(dist.matrix == 0, arr.ind = TRUE)
@@ -57,11 +61,14 @@ kann <- function(ref.profiles = NULL,
   weights.matrix <- weights.matrix^(-p) # Raise distance to inverse power
   weights.matrix[i.zerodist] <- 0 # Set 0 for sample weight on themselves
 
-  # Sort each row in distance matrix by column indices
-  weights.sorted.ix <- t(apply(dist.matrix, 1, FUN=function(row){
-    row[row == 0] <- max(row)+1 # zero distances to last position
-    sort(row, index.return = TRUE, decreasing = FALSE)$ix
-  }))
+  # Sort weights only if K != N
+  if(!is.null(k) & k != ncol(weights.matrix)) {
+    weights.sorted.ix <- do.call(rbind, parallel::mclapply(seq_len(nrow(dist.matrix)), function(i) {
+      row <- dist.matrix[i,]
+      row[row == 0] <- max(row) + 1  # Move zero distances to last position
+      sort(row, index.return = TRUE, decreasing = FALSE)$ix
+    }, mc.cores = cores))
+  }
 
   # Vector of population labels
   populations <- colnames(ref.profiles)[2:ncol(ref.profiles)]
@@ -75,14 +82,15 @@ kann <- function(ref.profiles = NULL,
     ref.pop.profiles <- ref.profiles[match(colnames(weights.matrix), ref.profiles$ID), pop, with = FALSE]
 
     # Add population profiles as column to matrix (depending on K)
-    if(is.null(k) | k == ncol(weights.matrix)){ # K not defined or same as number of reference samples
-      query.profiles[,pop] <- as.numeric(rowSums(weights.matrix %*% as.matrix(ref.pop.profiles)) / rowSums(weights.matrix))
-    } else{
-      query.profiles[,pop] <- as.numeric(sapply(1:nrow(weights.matrix), FUN=function(row){
-        # Indices of K nearest samples, excluding reference sample itself
-        i.sort <- weights.sorted.ix[row, 1:k]
+    if (is.null(k) | k == ncol(weights.matrix)) { # K equals number of reference samples
+      query.profiles[,pop] <- unlist(parallel::mclapply(seq_len(nrow(weights.matrix)), function(row) {
+        sum(weights.matrix[row,] * ref.pop.profiles) / sum(weights.matrix[row,])
+      }, mc.cores = cores))
+    } else {
+      query.profiles[,pop] <- unlist(parallel::mclapply(seq_len(nrow(weights.matrix)), function(row) {
+        i.sort <- weights.sorted.ix[row, 1:k] # Indices of K nearest samples
         sum(weights.matrix[row, i.sort] * ref.pop.profiles[i.sort]) / sum(weights.matrix[row, i.sort])
-      }))
+      }, mc.cores = cores))
     }
   }
 

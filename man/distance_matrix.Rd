@@ -9,7 +9,8 @@ distance_matrix(
   eigenval = NULL,
   id.ref = NULL,
   id.query = NULL,
-  pcs = 10
+  pcs = 10,
+  cores = 1
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ distance_matrix(
 \item{id.query}{character vector of query sample IDs}
 
 \item{pcs}{number of first PCs (integer) or specify custom set of PCs with numeric vector}
+
+\item{cores}{Number of parallel CPU cores utilized}
 }
 \value{
 Matrix of pairwise distances between query and reference samples
@@ -41,6 +44,7 @@ dist <- distance_matrix(eigenvec = pcaexample,
                         eigenval = eigvalexample,
                         id.ref = refidexample,
                         id.query = queryidexample,
-                        pcs = 2)
+                        pcs = 2,
+                        cores = 1)
 
 }
