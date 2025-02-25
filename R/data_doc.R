@@ -8,6 +8,7 @@
 #'   \item{PC1}{numeric, 1st principal component coordinate}
 #'   \item{PC2}{numeric, 2nd principal component coordinate}
 #' }
+#' @usage data(pcaexample)
 #' @source Simulated data
 "pcaexample"
 
@@ -22,6 +23,7 @@
 #'   \item{POP2}{numeric, ancestry fraction for population 2}
 #'   \item{POP3}{numeric, ancestry fraction for population 3}
 #' }
+#' @usage data(refexample)
 #' @source Simulated data
 "refexample"
 
@@ -30,6 +32,7 @@
 #' A character vector with IDs for reference individuals.
 #'
 #' @format character vector
+#' @usage data(refidexample)
 #' @source Simulated data
 "refidexample"
 
@@ -38,6 +41,7 @@
 #' A character vector with IDs for query individuals.
 #'
 #' @format character vector
+#' @usage data(queryidexample)
 #' @source Simulated data
 "queryidexample"
 
@@ -46,5 +50,6 @@
 #' A numeric vector containing the eigenvalues of the PCA analysis.
 #'
 #' @format numeric vector
+#' @usage data(eigvalexample)
 #' @source Simulated data
 "eigvalexample"

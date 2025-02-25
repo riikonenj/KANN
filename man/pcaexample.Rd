@@ -16,7 +16,7 @@ data table:
 Simulated data
 }
 \usage{
-pcaexample
+data(pcaexample)
 }
 \description{
 A data set containing PCA coordinates and IDs for reference and query samples.

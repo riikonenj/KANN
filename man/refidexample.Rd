@@ -11,7 +11,7 @@ character vector
 Simulated data
 }
 \usage{
-refidexample
+data(refidexample)
 }
 \description{
 A character vector with IDs for reference individuals.

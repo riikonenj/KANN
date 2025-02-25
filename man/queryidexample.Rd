@@ -11,7 +11,7 @@ character vector
 Simulated data
 }
 \usage{
-queryidexample
+data(queryidexample)
 }
 \description{
 A character vector with IDs for query individuals.

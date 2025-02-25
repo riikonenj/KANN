@@ -17,7 +17,7 @@ data table:
 Simulated data
 }
 \usage{
-refexample
+data(refexample)
 }
 \description{
 A data set with ancestry fractions for reference individuals.

@@ -11,7 +11,7 @@ numeric vector
 Simulated data
 }
 \usage{
-eigvalexample
+data(eigvalexample)
 }
 \description{
 A numeric vector containing the eigenvalues of the PCA analysis.
