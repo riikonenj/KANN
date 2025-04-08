@@ -18,7 +18,7 @@ kann(
 
 \item{dist.matrix}{matrix of pairwise distances between query (row) and reference (column) samples (required)}
 
-\item{k}{Number of nearest samples (positive integer) to consider in kNN-regression}
+\item{k}{Number of nearest samples (positive integer) to consider in k-nearest neighbor regression}
 
 \item{p}{Power of the inverse distance in which to raise reference sample weights}
 
