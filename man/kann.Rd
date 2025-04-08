@@ -14,9 +14,9 @@ kann(
 )
 }
 \arguments{
-\item{ref.profiles}{data.table of reference sample profiles}
+\item{ref.profiles}{data.table of reference sample profiles (required)}
 
-\item{dist.matrix}{matrix of pairwise distances between query (row) and reference (column) samples}
+\item{dist.matrix}{matrix of pairwise distances between query (row) and reference (column) samples (required)}
 
 \item{k}{Number of nearest samples (positive integer) to consider in kNN-regression}
 

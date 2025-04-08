@@ -14,13 +14,13 @@ distance_matrix(
 )
 }
 \arguments{
-\item{eigenvec}{data.table object of sample eigenvectors (PCs)}
+\item{eigenvec}{data.table object of sample eigenvectors (PCs) (required)}
 
-\item{eigenval}{numeric vector of eigenvalues}
+\item{eigenval}{numeric vector of eigenvalues (required)}
 
-\item{id.ref}{character vector of reference sample IDs}
+\item{id.ref}{character vector of reference sample IDs (required)}
 
-\item{id.query}{character vector of query sample IDs}
+\item{id.query}{character vector of query sample IDs (required)}
 
 \item{pcs}{number of first PCs (integer) or specify custom set of PCs with numeric vector}
 

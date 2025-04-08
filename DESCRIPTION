@@ -1,12 +1,11 @@
 Package: KANN
 Title: Estimation of genetic ancestry using k-nearest neighbor regression in principal component space
-Version: 0.0.1
+Version: 0.1.0
 Authors@R: 
     person("Juha", "Riikonen", , "juha.riikonen@helsinki.fi", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0008-8101-0134"))
 Description: Efficient genetic ancestry estimation for new query samples based on a set of reference samples with ancestry fractions to a number of source populations. As an input, KANN requires a data.table object of reference sample ancestries, and PC-coordinates and eigenvalues for both query and reference samples. Dummy data is provided with the package. Ancestry estimation with KANN is based on k-nearest neighbor regression in principal component space. 
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+License: GPL-3.0
 Encoding: UTF-8
 Depends:
   R (>= 3.5.0),

@@ -6,9 +6,9 @@
 #' The function requires the distance matrix as an input, see documentation for
 #' distance_matrix function.
 #'
-#' @param ref.profiles data.table of reference sample profiles
-#' @param dist.matrix matrix of pairwise distances between query (row) and reference (column) samples
-#' @param k Number of nearest samples (positive integer) to consider in kNN-regression
+#' @param ref.profiles data.table of reference sample profiles (required)
+#' @param dist.matrix matrix of pairwise distances between query (row) and reference (column) samples (required)
+#' @param k Number of nearest samples (positive integer) to consider in k-nearest neighbor regression
 #' @param p Power of the inverse distance in which to raise reference sample weights
 #' @param r0 Minimum radius inside which samples are assigned same weight r0
 #' @param cores Number of parallel CPU cores utilized

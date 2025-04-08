@@ -6,10 +6,10 @@
 #' prior to applying the KANN algorithm
 #'
 #'
-#' @param eigenvec data.table object of sample eigenvectors (PCs)
-#' @param eigenval numeric vector of eigenvalues
-#' @param id.ref character vector of reference sample IDs
-#' @param id.query character vector of query sample IDs
+#' @param eigenvec data.table object of sample eigenvectors (PCs) (required)
+#' @param eigenval numeric vector of eigenvalues (required)
+#' @param id.ref character vector of reference sample IDs (required)
+#' @param id.query character vector of query sample IDs (required)
 #' @param pcs number of first PCs (integer) or specify custom set of PCs with numeric vector
 #' @param cores Number of parallel CPU cores utilized
 #'
