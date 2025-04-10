@@ -9,7 +9,7 @@ kann(
   dist.matrix = NULL,
   k = 25,
   p = 1,
-  r0 = 0.1,
+  eps = 0.1,
   cores = 1
 )
 }
@@ -22,7 +22,7 @@ kann(
 
 \item{p}{Power of the inverse distance in which to raise reference sample weights}
 
-\item{r0}{Minimum radius inside which samples are assigned same weight r0}
+\item{eps}{Minimum radius inside which samples are assigned same weight (epsilon)}
 
 \item{cores}{Number of parallel CPU cores utilized}
 }
@@ -53,7 +53,7 @@ query.profiles <- kann(ref.profiles = refexample,
                        dist.matrix = dist,
                        k = 25,
                        p = 0,
-                       r0 = 0.1,
+                       eps = 0.1,
                        cores = 1)
 
 }

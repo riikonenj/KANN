@@ -10,7 +10,7 @@
 #' @param dist.matrix matrix of pairwise distances between query (row) and reference (column) samples (required)
 #' @param k Number of nearest samples (positive integer) to consider in k-nearest neighbor regression
 #' @param p Power of the inverse distance in which to raise reference sample weights
-#' @param r0 Minimum radius inside which samples are assigned same weight r0
+#' @param eps Minimum radius inside which samples are assigned same weight (epsilon)
 #' @param cores Number of parallel CPU cores utilized
 #'
 #' @return data.table of query sample profiles
@@ -35,21 +35,21 @@
 #'                        dist.matrix = dist,
 #'                        k = 25,
 #'                        p = 0,
-#'                        r0 = 0.1,
+#'                        eps = 0.1,
 #'                        cores = 1)
 #'
 kann <- function(ref.profiles = NULL,
                  dist.matrix = NULL,
                  k = 25,
                  p = 1,
-                 r0 = 0.1,
+                 eps = 0.1,
                  cores = 1){
 
   validate_kann_input(ref.profiles = ref.profiles,
                       dist.matrix = dist.matrix,
                       k = k,
                       p = p,
-                      r0 = r0)
+                      eps = eps)
 
 
   # Array indices of samples distances to themselves (this is zero)
@@ -57,7 +57,7 @@ kann <- function(ref.profiles = NULL,
 
   # Preprocess PCA distance matrix to sample ancestry weight matrix
   weights.matrix <- dist.matrix # copy matrix
-  weights.matrix[which(weights.matrix < r0, arr.ind = TRUE)] <- r0 # assign r0 to distances less than r0
+  weights.matrix[which(weights.matrix < eps, arr.ind = TRUE)] <- eps # assign eps to distances less than eps
   weights.matrix <- weights.matrix^(-p) # Raise distance to inverse power
   weights.matrix[i.zerodist] <- 0 # Set 0 for sample weight on themselves
 

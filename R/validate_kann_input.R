@@ -3,7 +3,7 @@ validate_kann_input <- function(ref.profiles,
                                 dist.matrix,
                                 k,
                                 p,
-                                r0){
+                                eps){
   # ref.profiles
   stopifnot("Reference sample profiles is NULL" = !is.null(ref.profiles))
   stopifnot("Column named 'ID' not found in reference sample profiles" = "ID" %in% colnames(ref.profiles)) # ID column
@@ -24,9 +24,9 @@ validate_kann_input <- function(ref.profiles,
   stopifnot("p not numeric" = is.numeric(p))
   stopifnot("p has to be non-negative" = p >= 0)
 
-  # r0:
-  stopifnot("Min. radius r0 not numeric" = is.numeric(r0))
-  stopifnot("Min. radius r0 has to be non-negative" = r0 >= 0)
+  # eps:
+  stopifnot("Min. radius eps not numeric" = is.numeric(eps))
+  stopifnot("Min. radius eps has to be non-negative" = eps >= 0)
 
 
 }
