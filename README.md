@@ -6,7 +6,10 @@ Together with known ancestry profiles of reference individuals, ancestry is esti
 
 KANN enables using admixed reference individuals with continuous ancestry information, i.e. having proportions of genetic ancestry inherited from multiple source populations.
 In addition, KANN is compatible with the conventional format where reference individuals are discretely allocated to a single source population.
-This can be achieved by assigning 100% ancestry to one of the source populations, and 0% to others.
+This can be achieved by assigning 100% (i.e. 1) ancestry to one of the source populations, and 0% to others.
+
+Although KANN is originally implemented to work with PCs, it is also possible to run KANN by replacing PCs with e.g. haplotype components obtained via PBWTpaint or similar software.
+Note that in it's current form, KANN still requires the columns in the sample coordinate input to be named "PC1", "PC2", etc. even when using other input data than PCs.
 
 ## Installation
 ```
@@ -115,7 +118,7 @@ query.profiles <- kann(ref.profiles = refexample,
                        dist.matrix = dist,
                        k = 25,
                        p = 0,
-                       r0 = 0.1,
+                       eps = 0.1,
                        cores = 1)
                         
 > query.profiles
