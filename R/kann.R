@@ -41,7 +41,7 @@
 kann <- function(ref.profiles = NULL,
                  dist.matrix = NULL,
                  k = 25,
-                 p = 1,
+                 p = 3,
                  eps = 0.1,
                  cores = 1){
 
